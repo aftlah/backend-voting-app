@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// schema.prisma
+
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Candidate {
+  id    Int     @id @default(autoincrement())
+  name  String
+  nim   String  @unique
+  role  Role
+  photo String?
+  
+  // Relasi
+  optionsAsKetua Option[] @relation("Ketua")
+  optionsAsWakil Option[] @relation("Wakil")
+}
+
+model User {
+  id        Int     @id @default(autoincrement())
+  email     String  @unique
+  hasVoted  Boolean @default(false)
+  votes     Vote[]
+}
+
+model Option {
+  id      Int       @id @default(autoincrement())
+  ketua   Candidate @relation("Ketua", fields: [ketuaId], references: [id])
+  ketuaId Int
+  wakil   Candidate @relation("Wakil", fields: [wakilId], references: [id])
+  wakilId Int
+  
+  votes Vote[]
+}
+
+model Vote {
+  id        Int      @id @default(autoincrement())
+  option    Option   @relation(fields: [optionId], references: [id])
+  optionId  Int
+  User     User    @relation(fields: [userId], references: [id])
+  userId   Int
+  createdAt DateTime @default(now())
+}
+
+enum Role {
+  Ketua
+  Wakil_Ketua
+}
