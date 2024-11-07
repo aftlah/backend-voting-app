@@ -1,8 +1,7 @@
-// routes/candidateRoutes.js
 const express = require('express');
 const router = express.Router();
-const candidateController = require('../controllers/candidateController');
+const {getAllCandidates} = require('../controllers/candidateController');
 
-router.get('/', candidateController.getAllCandidates);
+router.get('/', getAllCandidates);
 
 module.exports = router;

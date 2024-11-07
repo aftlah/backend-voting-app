@@ -1,4 +1,3 @@
-// controllers/candidateController.js
 const prisma = require('../config/db');
 
 const getAllCandidates = async (req, res) => {
