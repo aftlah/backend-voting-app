@@ -3,8 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const voteRoutes = require('./routes/voteRoutes');
 const candidateRoutes = require('./routes/candidateRoutes');
-const voterRoutes = require('./routes/authRoutes'); // Import voterRoutes
-
+const voterRoutes = require('./routes/authRoutes'); 
 require('dotenv').config();
 
 const app = express();
