@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/app.js",
+      "use": "@vercel/node",
+      "config": {
+        "buildCommand": "prisma generate && npm run build"
+      }
+    }
+  ],
+  "env": {
+    "DATABASE_URL": "mysql://root:@localhost:3306/voting-app?schema=public"
+  },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/app.js"
+    }
+  ]
+}
