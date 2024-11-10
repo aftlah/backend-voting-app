@@ -10,12 +10,19 @@
     }
   ],
   "env": {
-    "DATABASE_URL": "mysql://root:@localhost:3306/voting-app?schema=public"
+    "DATABASE_URL": "mysql://root:@localhost:3306/voting-app"
   },
   "routes": [
     {
-      "src": "/api/afx-v1/(.*)",
+      "src": "/api/(.*)",
+      "dest": "src/app.js"
+    },
+    {
+      "src": "/(.*)",
       "dest": "src/app.js"
     }
   ]
 }
+
+
+
