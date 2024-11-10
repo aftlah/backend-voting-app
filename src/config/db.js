@@ -1,12 +1,11 @@
-// config/db.js
-const { PrismaClient } = require('@prisma/client');
 
-// Inisialisasi Prisma Client
+import { PrismaClient } from '@prisma/client';
+
+
 const prisma = new PrismaClient({
-    log: ['query', 'info', 'warn', 'error'], // Mengaktifkan logging untuk debugging (opsional)
+    log: ['query', 'info', 'warn', 'error'],
 });
 
-// Fungsi untuk menutup koneksi Prisma saat aplikasi ditutup
 const disconnectPrisma = async () => {
     try {
         await prisma.$disconnect();
@@ -16,8 +15,7 @@ const disconnectPrisma = async () => {
     }
 };
 
-// Pastikan Prisma Client menutup koneksi saat aplikasi dihentikan
 process.on('SIGINT', disconnectPrisma);
 process.on('SIGTERM', disconnectPrisma);
 
-module.exports = prisma;
+export default prisma;
